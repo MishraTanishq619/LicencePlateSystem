@@ -1,0 +1,20 @@
+import RPi.GPIO as GPIO
+import time
+
+# Set up the GPIO mode and pin
+GPIO.setmode(GPIO.BCM)  # GPIO.BCM or GPIO.BOARD, depending on your setup
+servo_pin = 18  # GPIO pin where the servo is connected (GPIO18 in this case)
+
+# Set the GPIO pin as an output
+GPIO.setup(servo_pin, GPIO.OUT)
+
+# Set up PWM on the pin
+pwm = GPIO.PWM(servo_pin, 50)  # PWM at 50Hz (standard frequency for servos)
+pwm.start(0)  # Initialize the PWM with 0% duty cycle
+
+# Function to move servo to a given angle
+def set_servo_angle(angle):
+    duty_cycle = (angle / 18) + 2  # Convert angle to duty cycle (2-12)
+    pwm.ChangeDutyCycle(duty_cycle)  # Set the servo position
+    time.sleep(1)  # Give time for the servo to reach the position
+    pwm.ChangeDutyCycle(0)  # Stop PWM to avoid jittering
