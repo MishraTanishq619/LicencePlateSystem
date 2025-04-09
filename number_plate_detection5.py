@@ -180,7 +180,7 @@ while True:
                 GPIO.output(GREEN_LED_PIN, False)
                 GPIO.output(RED_LED_PIN, True)
                 GPIO.output(BUZZER_PIN, True)
-                time.sleep(1)
+                time.sleep(0.5)
                 GPIO.output(BUZZER_PIN, False)
 
         # Display the frame
